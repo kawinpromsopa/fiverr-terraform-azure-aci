@@ -209,8 +209,9 @@ module "container_instances_1" {
 ```
 
 
-## Authenticate and terraform apply
+## Authenticate and terraform init, apply
 ```
 az login
+terraform init
 terraform apply 
 ```

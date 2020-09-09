@@ -7,12 +7,6 @@ terraform {
   required_version = ">= 0.12.0"
 }
 
-resource "azurerm_resource_group" "default" {
-  name     = var.name
-  location = var.location
-  tags     = var.tags
-}
-
 resource "azurerm_container_group" "default" {
     for_each            = var.aci
     name                = each.value.name
@@ -21,7 +15,8 @@ resource "azurerm_container_group" "default" {
     ip_address_type     = each.value.ip_address_type
     dns_name_label      = each.value.dns_name_label
     os_type             = each.value.os_type
-
+    restart_policy      = each.value.restart_policy
+    tags                = each.value.tags 
 
     dynamic "container" {
         for_each = each.value.containers
